@@ -40,8 +40,7 @@ script:
 #- source build.sh <<< "${nbasebuildsh}"
 - export ARCH=arm && export SUBARCH=arm
 - make clean && make mrproper CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
-- make menuconfig
-- make ancora.defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
+- make ancora_oc_exuv_defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 - make -j$(nproc –all) CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 
 
