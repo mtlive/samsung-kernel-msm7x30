@@ -37,17 +37,21 @@ script:
 # ${ndevicechoice} is "Number of Choice under Device Choice"
 - ndevicechoice="1"
 - export nbasebuildsh="${nclean}${ntoolchain}${ndevice}${ndevicechoice}${nimage}${nbuild}q"
-- source build.sh <<< "${nbasebuildsh}"
+#- source build.sh <<< "${nbasebuildsh}"
+- export ARCH=arm && export SUBARCH=arm
+- make clean && make mrproper CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
+- make ancora.defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
+- make -j$(nproc –all) CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 
 
 # Export of zipfile to deploy
-- export zipfile#="${zipfile}"
+#- export zipfile="${zipfile}"
 
 deploy:
   provider: releases
   skip_cleanup: true
   api_key: "ed6c74b60bc30491782f16bd90dd604d42150da1"
-  file: "zip-creator/${zipfile}"
+  file: "arch/${ARCH}/boot/Image*"
   on:
     tags: true
 
