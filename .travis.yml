@@ -35,6 +35,7 @@ script:
 #- nimage="7"
 # Last "q" is to Exit of Script
 # ${ndevicechoice} is "Number of Choice under Device Choice"
+- ndevicechoice="1"
 - export nbasebuildsh="${nclean}${ndevice}${ntoolchain}${ndevicechoice}${nimage}${nbuild}q"
 - source build.sh <<< "${nbasebuildsh}"
 
