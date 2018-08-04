@@ -22,7 +22,7 @@ echo "*) Any other key to Exit"
 echo
 read -p "Choice: " -n 1 -s x
 case "${x}" in
-	1 ) defconfig="ancora_defconfig"; name="W"; variant=""; name1="Galaxy W"; name2="Galaxy W"; name3="ancora"; name4="ancora";;
+	1 ) defconfig="ancora_defconfig"; name="W"; variant="W"; name1="Galaxy W"; name2="Galaxy W"; name3="ancora"; name4="ancora";;
 	* ) ;;
 esac
 if [ "${defconfig}" == "" ]
