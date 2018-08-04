@@ -10,7 +10,7 @@ script:
 - sudo add-apt-repository ppa:nathan-renniewaldock/ppa -y
 - sudo apt-get update
 # getting UberTC
-- git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-7.x" "../Toolchain"
+- git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-7.x" "../arm-eabi-7.x"
 
 #
 # This will call build.sh with following parameters inside ${nbasebuildsh}:
@@ -27,14 +27,15 @@ script:
 # "3" is "Device Choice"
 - ndevice="1"
 # ${ntoolchain} = "4" is "Toolchain Choice"
-- ntoolchain="47"
+- ntoolchain="4"
+- toolchainpath="../arm-eabi-7.x/bin/arm-eabi-"
 # ${nbuild} = "5" is "Build Kernel" and "6" is "Zip the kernel and Modules"
 - nbuild="56"
 # ${nimage} = "7" is "Compressed image on/off"
 #- nimage="7"
 # Last "q" is to Exit of Script
 # ${ndevicechoice} is "Number of Choice under Device Choice"
-- export nbasebuildsh="${nclean}${ntoolchain}${ndevice}${ndevicechoice}${nimage}${nbuild}q"
+- export nbasebuildsh="${nclean}${ntoolchain}${toolchainpath}${ndevice}${ndevicechoice}${nimage}${nbuild}q"
 - source build.sh <<< "${nbasebuildsh}"
 
 
