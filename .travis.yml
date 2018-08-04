@@ -27,7 +27,7 @@ script:
 # "3" is "Device Choice"
 - ndevice="1"
 # ${ntoolchain} = "4" is "Toolchain Choice"
-- ntoolchain="4"
+- ntoolchain="47"
 - CROSS_COMPILE="../arm-eabi-7.x/bin/arm-eabi-"
 # ${nbuild} = "5" is "Build Kernel" and "6" is "Zip the kernel and Modules"
 - nbuild="56"
@@ -36,7 +36,7 @@ script:
 # Last "q" is to Exit of Script
 # ${ndevicechoice} is "Number of Choice under Device Choice"
 - ndevicechoice="1"
-- export nbasebuildsh="${nclean}${ndevice}${ntoolchain}${ndevicechoice}${nimage}${nbuild}q"
+- export nbasebuildsh="${nclean}${ntoolchain}${ndevice}${ndevicechoice}${nimage}${nbuild}q"
 - source build.sh <<< "${nbasebuildsh}"
 
 
