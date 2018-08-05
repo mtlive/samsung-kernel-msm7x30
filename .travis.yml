@@ -7,7 +7,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-5
+    - gcc-5 --install-suggests
     - g++-5
 script:
 #
@@ -46,7 +46,9 @@ script:
 # ${ndevicechoice} is "Number of Choice under Device Choice"
 - ndevicechoice="1"
 - export nbasebuildsh="${nclean}${ntoolchain}${ndevice}${ndevicechoice}${nimage}${nbuild}q"
-- find / -name the_name_of_the_file.so
+- sudo find / -name libfl.so.2
+- export LD_LIBRARY_PATH="/usr/local/lib"
+- sudo ldconfig
 - echo $LD_LIBRARY_PATH
 #- source build.sh <<< "${nbasebuildsh}"
 - export ARCH=arm && export SUBARCH=arm
