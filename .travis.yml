@@ -1,15 +1,16 @@
 sudo: required
+dist: trusty
 language: c
 cache: ccache
 env: GCC_VERSION=5
 addons:
   apt:
-#    sources:
-#    - ubuntu-toolchain-r-test
+    sources:
+    - ubuntu-toolchain-r-test
     packages:
-#    - gcc-5
-#    - g++-5
-#    - flex
+    - gcc-5
+    - g++-5
+    - flex
 script:
 # Install dependency
 - sudo apt-get install -y dpkg
@@ -54,7 +55,7 @@ script:
 - export ARCH=arm && export SUBARCH=arm
 - make clean && make mrproper CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 - make ancora_oc_exuv_defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
-- make -j$(nproc –all) CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
+- make -j 2 CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 
 
 # Export of zipfile to deploy
