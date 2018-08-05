@@ -8,8 +8,8 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-5
-    - g++-5
+    - gcc-7
+    - g++-7
     - flex
 script:
 # Install dependency
@@ -21,7 +21,7 @@ script:
 - sudo apt-get update
 - sudo apt install libfl2
 # getting UberTC
-- git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-5.x" "../arm-eabi-5.x"
+- git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-7.x" "../arm-eabi-7.x"
 #
 # This will call build.sh with following parameters inside ${nbasebuildsh}:
 #
@@ -38,7 +38,7 @@ script:
 - ndevice="1"
 # ${ntoolchain} = "4" is "Toolchain Choice"
 - ntoolchain="47"
-- export CROSS_COMPILE="$(pwd)/../arm-eabi-5.x/bin/arm-eabi-"
+- export CROSS_COMPILE="$(pwd)/../arm-eabi-7.x/bin/arm-eabi-"
 # ${nbuild} = "5" is "Build Kernel" and "6" is "Zip the kernel and Modules"
 - nbuild="56"
 # ${nimage} = "7" is "Compressed image on/off"
