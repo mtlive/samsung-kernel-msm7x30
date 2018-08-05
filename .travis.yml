@@ -1,15 +1,14 @@
 sudo: required
 language: c
 cache: ccache
-include: 
-  - env: GCC_VERSION=5
-  addons: &gcc5
+env: GCC_VERSION=5
+addons: &gcc5
   apt: 
     packages: 
-       - g++-5 
-       - gcc-5 
-    sources: 
-       - ubuntu-toolchain-r-test
+      - g++-5 
+      - gcc-5 
+  sources: 
+    - sourceline: 'ppa:ubuntu-toolchain-r/test'
 script:
 #
 # Travis CI Script by Caio Oliveira aka Caio99BR <caiooliveirafarias0@gmail.com>
