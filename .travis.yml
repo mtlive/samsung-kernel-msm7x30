@@ -17,7 +17,7 @@ script:
 
 # Install dependency
 - sudo add-apt-repository 'deb http://cz.archive.ubuntu.com/ubuntu bionic main'
-- sudo apt-get install -t bionic libfl2
+- sudo apt-get install libfl2
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 #- sudo apt-get update
 #- sudo apt install 
