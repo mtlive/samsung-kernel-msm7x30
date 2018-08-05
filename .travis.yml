@@ -11,17 +11,13 @@ addons:
     - g++-5
     - flex
 script:
-#
-# Travis CI Script by Caio Oliveira aka Caio99BR <caiooliveirafarias0@gmail.com>
-#
-
 # Install dependency
-#- sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu bionic main"
-- wget http://mirrors.kernel.org/ubuntu/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
-- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
+- sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu bionic main"
+#- wget http://mirrors.kernel.org/ubuntu/pool/main/f/flex/libfl2_2.6.4-6.1_amd64.deb
+#- sudo dpkg -i libfl2_2.6.4-6.1_amd64.deb
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-#- sudo apt-get update
-#- sudo apt install 
+- sudo apt-get update
+- sudo apt install libfl2
 # getting UberTC
 - git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-5.x" "../arm-eabi-5.x"
 #
