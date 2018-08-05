@@ -1,14 +1,24 @@
 sudo: required
 language: c
 cache: ccache
+include: 
+  - env: GCC_VERSION=5
+  addons: &gcc5
+  apt: 
+    packages: 
+       - g++-5 
+       - gcc-5 
+    sources: 
+       - ubuntu-toolchain-r-test
 script:
 #
 # Travis CI Script by Caio Oliveira aka Caio99BR <caiooliveirafarias0@gmail.com>
 #
 
 # Install dependency
-- sudo add-apt-repository ppa:nathan-renniewaldock/ppa -y
-- sudo apt-get update
+#- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+#- sudo apt-get update
+#- sudo apt install 
 # getting UberTC
 - git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-5.x" "../arm-eabi-5.x"
 
