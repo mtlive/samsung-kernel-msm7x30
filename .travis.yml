@@ -16,14 +16,13 @@ script:
 #
 
 # Install dependency
-- sudo add-apt-repository 'deb http://cz.archive.ubuntu.com/ubuntu bionic main'
+- sudo add-apt-repository "deb http://cz.archive.ubuntu.com/ubuntu bionic main"
 - sudo apt-get install libfl2
 #- sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 #- sudo apt-get update
 #- sudo apt install 
 # getting UberTC
 - git clone  --depth=1 "https://bitbucket.org/matthewdalex/arm-eabi-5.x" "../arm-eabi-5.x"
-
 #
 # This will call build.sh with following parameters inside ${nbasebuildsh}:
 #
