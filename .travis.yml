@@ -55,7 +55,7 @@ script:
 - export ARCH=arm && export SUBARCH=arm
 - make clean && make mrproper CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
 - make ancora_oc_exuv_defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
-- make -j 2 CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
+- make -j 2 CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon' CONFIG_NO_ERROR_ON_MISMATCH=y
 
 
 # Export of zipfile to deploy
