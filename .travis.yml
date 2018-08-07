@@ -1,8 +1,19 @@
 sudo: required
 dist: trusty
+services:
+  - docker
+before_install:
+- docker pull lineageos4microg/docker-lineage-cicd
+- docker run \
+    -e "BRANCH_NAME=cm-11.0" \
+    -v "/home/user/lineage:/srv/src" \
+    -v "/home/user/zips:/srv/zips" \
+    -v "/home/user/logs:/srv/logs" \
+    -v "/home/user/cache:/srv/ccache" \
+    lineageos4microg/docker-lineage-cicd
 language: c
 cache: ccache
-env: GCC_VERSION=5
+env: GCC_VERSION=7
 addons:
   apt:
     sources:
@@ -53,9 +64,9 @@ script:
 - echo $LD_LIBRARY_PATH
 #- source build.sh <<< "${nbasebuildsh}"
 - export ARCH=arm && export SUBARCH=arm
-- make clean && make mrproper CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
-- make ancora_oc_exuv_defconfig CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon'
-- make -j 2 CFLAGS='-march=armv7-a -mtune=cortex-a8 -mfpu=neon' CONFIG_NO_ERROR_ON_MISMATCH=y
+- make clean && make mrproper 
+- make ancora_oc_exuv_defconfig 
+- make -j 4 
 
 
 # Export of zipfile to deploy
@@ -65,7 +76,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key: "ed6c74b60bc30491782f16bd90dd604d42150da1"
-  file: "arch/${ARCH}/boot/Image*"
-  on:
-    tags: true
+  file: "arch/${ARCH}/boot/*Image*"
+  #on:
+  #  tags: true
 
