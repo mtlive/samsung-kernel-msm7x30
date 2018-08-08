@@ -60,7 +60,7 @@ script:
 - export ARCH=arm && export SUBARCH=arm
 - make clean && make mrproper 
 - make ancora_oc_exuv_defconfig 
-- make -j 4 
+- make -j 4 V=1
 
 
 # Export of zipfile to deploy
@@ -69,7 +69,7 @@ script:
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key: "ed6c74b60bc30491782f16bd90dd604d42150da1"
+  api_key: ${KEY}
   file_glob: true
   file: "arch/${ARCH}/boot/*Image*"
   on:
