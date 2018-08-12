@@ -243,10 +243,11 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
 
+GRAPHITE = -fgraphite -fgraphite-identity -floop-interchange -ftree-loop-distribution -floop-strip-mine -floop-block -ftree-loop-linear
 HOSTCC       = gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fno-tree-vectorize -fomit-frame-pointer
-HOSTCXXFLAGS = -O3 -fno-tree-vectorize
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -Ofast -fomit-frame-pointer -pipe -DNDEBUG -fgcse-las $(GRAPHITE)
+HOSTCXXFLAGS = -pipe -DNDEBUG -Ofast -fgcse-las $(GRAPHITE)
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -350,12 +351,15 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 OPTIMIZATION_FLAGS = -march=armv7-a -mtune=cortex-a8 -mfpu=neon \
                      -ffast-math -fsingle-precision-constant \
                      -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr
-CFLAGS_MODULE   = $(OPTIMIZATION_FLAGS)
-AFLAGS_MODULE   = $(OPTIMIZATION_FLAGS)
+KERNELFLAGS     = -pipe -DNDEBUG -Ofast -fno-schedule-insns2 -ffast-math -mtune=cortex-a8 -march=armv7-a -mcpu=cortex-a8 -mfpu=neon -marm -mno-unaligned-access $(GRAPHITE)		     
+MODFLAGS        = -DMODULE $(KERNELFLAGS)
+
+CFLAGS_MODULE   = $(MODFLAGS)
+AFLAGS_MODULE   = $(MODFLAGS)
 LDFLAGS_MODULE  =
-CFLAGS_KERNEL   = $(OPTIMIZATION_FLAGS)
-AFLAGS_KERNEL   = $(OPTIMIZATION_FLAGS)
-CFLAGS_GCOV     = -fprofile-arcs -ftest-coverage
+CFLAGS_KERNEL	= $(KERNELFLAGS) -fpredictive-commoning
+AFLAGS_KERNEL	= $(KERNELFLAGS)
+CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
 # Use LINUXINCLUDE when you must reference the include/ directory.
@@ -371,12 +375,16 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
                    -fno-strict-aliasing -fno-common \
                    -Werror-implicit-function-declaration \
                    -Wno-format-security \
-                   -fno-delete-null-pointer-checks
+                   -fno-delete-null-pointer-checks \
+		   -fno-diagnostics-show-caret -Wno-packed-not-aligned \
+		   $(KERNELFLAGS)
+KBUILD_AFLAGS_KERNEL := $(KERNELFLAGS)
+KBUILD_CFLAGS_KERNEL := $(KERNELFLAGS)
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
-KBUILD_AFLAGS_MODULE  := -DMODULE
-KBUILD_CFLAGS_MODULE  := -DMODULE
+KBUILD_AFLAGS_MODULE  := $(MODFLAGS)
+KBUILD_CFLAGS_MODULE  := $(MODFLAGS)
 KBUILD_LDFLAGS_MODULE := -T $(srctree)/scripts/module-common.lds
 
 # Read KERNELRELEASE from include/config/kernel.release (if it exists)
