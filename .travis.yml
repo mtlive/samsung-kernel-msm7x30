@@ -62,7 +62,7 @@ script:
 - make ancora_oc_exuv_defconfig 
 - make -j 4 V=1
 
-
+- find . -name "*.ko" -print | zip modules.zip -@
 # Export of zipfile to deploy
 #- export zipfile="${zipfile}"
 
@@ -71,7 +71,9 @@ deploy:
   skip_cleanup: true
   api_key: ${KEY}
   file_glob: true
-  file: "arch/${ARCH}/boot/*Image*"
+  file: 
+    - "arch/${ARCH}/boot/zImage*"
+    - "modules.zip"
   on:
   #  tags: true
     all_branches: true
